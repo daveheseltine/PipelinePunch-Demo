@@ -2,29 +2,23 @@
 <a id="readme-top"></a>
 
 # PipelinePunch-Demo
-This project is a personal C++ learning and experimentation environment developed alongside my studies at Newcastle University.
+A performance-oriented application and engine extension written in modern C++14, integrated with Godot 4 via GDExtension and deployed successfully on Android.
 
-It serves as an RPG prototype based in the Godot-engine, with key performance areas handled with C++.
+**Build pipeline**: SCons, Android NDK 23.2, Godot-CPP, continuous deployment tests.
 
-My goal is to learn and explore:
-- High-performance C++ systems, combined with Struct-of-Arrays data layouts.
-- Clean architecture & static libraries.
-- Custom binary serialization.
-- C++14 integration with the Godot 4 GDExtension system.
+<img src="Screenshots\PipelinePunch-Demo.jpg" alt="Screenshot"  width="200">
 
 ## CombatSystem
 The CombatSystem owns and executes all combat logic for a 5v5 videogame battle. It is designed for maximum performance and determinism, with a focus on predictable, debuggable behaviour.
 
-- **Struct-of-Arrays (SoA)** character tables for extremely cache-friendly iteration.
-- **Tiered event processing** (negates → intercepts → fast → main → slow).
-- **Reaction system** with conditional triggers and speed-based tie-breaking.
-- **ATB-style turn bar** that selects the next actor deterministically
-- **Minimal, clean API** exposed to Godot for UI & player input.
+- **Struct-of-Arrays (SoA)** combat engine for optimal cache locality and SIMD friendliness.
+- **Tiered event processing** with deterministic processing. (negates → intercepts → fast → main → slow).
+- **Advanced reasoning** by implementing pointers registered to libraries.
+- **High-performance binary serialisation** for character/party data.
+- **Custom API bindings** (GDExtension) with zero dynamic allocation in the core loop.
 
 ## ActiveEventBuilders
-These functions define the rules for how skills generate combat events.
-
-ActiveEventBuilders operate in two phases:
+These functions define the rules for how skills generate combat events. ActiveEventBuilders operate in two phases, allowing passives and intercepts to modify or react to events before they resolve, matching the game’s design:
 
 #### Event creation phase (1)
 `Event* == nullptr`: an ActiveEventBuilder describes the shape of the event:
@@ -38,10 +32,8 @@ ActiveEventBuilders operate in two phases:
 - damage
 - status effect application
 
-This two-step system allows passives and intercepts to modify or react to events before they resolve, matching the game’s design.
-
 ## Creature and Skill Libraries
-The project includes two static read-only libraries:
+The project currently includes two static read-only libraries:
 
 #### Creature Library
 - Defines all base creatures (stats, type, skills).
@@ -142,7 +134,7 @@ cpp/
 ```
 
 ## Installation
-TO BE ADDED
+Android Release: https://github.com/daveheseltine/PipelinePunch-Demo/releases/tag/v0.1.0
 
 ## License
 This project uses a Proprietary / All Rights Reserved license.
