@@ -4,7 +4,7 @@
 # PipelinePunch-Demo
 A performance-oriented application and engine extension written in modern C++14, integrated with Godot 4 via GDExtension and deployed successfully on Android.
 
-**Build pipeline**: SCons, Android NDK 23.2, Godot-CPP, continuous deployment tests.
+**Build pipeline**: SCons, Android NDK 23.2, Godot-CPP.
 
 <img src="Screenshots\PipelinePunch-Demo.jpg" alt="Screenshot"  width="200">
 
@@ -12,9 +12,9 @@ A performance-oriented application and engine extension written in modern C++14,
 The CombatSystem owns and executes all combat logic for a 5v5 videogame battle. It is designed for maximum performance and determinism, with a focus on predictable, debuggable behaviour.
 
 - **Struct-of-Arrays (SoA)** combat engine for optimal cache locality and SIMD friendliness.
-- **Tiered event processing** with deterministic processing. (negates → intercepts → fast → main → slow).
+- **Tiered event processing** with deterministic processing. (negates, intercepts, fast, main, slow).
 - **Advanced reasoning** by implementing pointers registered to libraries.
-- **High-performance binary serialisation** for character/party data.
+- **High-performance binaries** for character/party data.
 - **Custom API bindings** (GDExtension) with zero dynamic allocation in the core loop.
 
 ## ActiveEventBuilders
@@ -22,15 +22,15 @@ These functions define the rules for how skills generate combat events. ActiveEv
 
 #### Event creation phase (1)
 `Event* == nullptr`: an ActiveEventBuilder describes the shape of the event:
-- target bitmask
-- effect bitmask
-- AOE/single-target flags
-- metadata used by passive systems
+- Target bitmask.
+- Effect bitmask.
+- AOE/single-target flags.
+- Metadata used by passive systems.
 
 #### Event resolution phase (2)
 `Event* != nullptr`: the builder computes final values such as:
-- damage
-- status effect application
+- Damage.
+- Status effect application.
 
 ## Creature and Skill Libraries
 The project currently includes two static read-only libraries:
@@ -43,7 +43,7 @@ The project currently includes two static read-only libraries:
 #### Skill Library
 - Maps `SkillEnum` to behaviour and metadata.
 - Stores names and descriptions.
-- Provides function pointers to `ActiveEventBuilders` and (eventually) `PassiveEventBuilders`.
+- Provides function pointers to `ActiveEventBuilders` and (not included in demo build) `PassiveEventBuilders`.
 - Fully static, allocated once.
 
 This structure keeps runtime performance high while remaining easy to expand.
@@ -145,7 +145,7 @@ See [LICENSE.md](LICENSE.md) for details.
 ---
 
 <!-- FOOTER & COPYRIGHT -->
-Copyright © 2025 David Heseltine<br>
+Copyright © 2026 David Heseltine<br>
 All Rights Reserved.
 
 ([back to top](#readme-top))
